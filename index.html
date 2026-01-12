@@ -404,6 +404,108 @@
             color: #333;
         }
 
+        .participant-selector {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .participant-selector h3 {
+            color: #047857;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .participant-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .participant-btn {
+            padding: 10px 20px;
+            border: 2px solid #d1fae5;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .participant-btn:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .participant-btn.selected {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .participant-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .participant-all { background: #dbeafe; color: #1e40af; }
+        .participant-older-kids { background: #fce7f3; color: #be185d; }
+        .participant-younger-kids { background: #fef3c7; color: #d97706; }
+        .participant-adults-only { background: #e0e7ff; color: #4338ca; }
+        .participant-split-groups { background: #f3e8ff; color: #7c3aed; }
+        .participant-custom { background: #e5e7eb; color: #374151; }
+
+        .participants-display {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .confirm-activity-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.05em;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .confirm-activity-btn:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .confirm-activity-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .modal-step-1, .modal-step-2 {
+            transition: all 0.3s ease;
+        }
+
+        .modal-step-1.hidden, .modal-step-2.hidden {
+            display: none;
+        }
+
         @media print {
             body {
                 background: white;
@@ -488,12 +590,42 @@
     <!-- Modal for adding activities -->
     <div id="activity-modal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>Select Activity for <span id="modal-day-title"></span></h2>
-                <span class="close-modal" onclick="closeModal()">&times;</span>
+            <!-- Step 1: Select Activity -->
+            <div class="modal-step-1">
+                <div class="modal-header">
+                    <h2>Step 1: Select Activity for <span id="modal-day-title"></span></h2>
+                    <span class="close-modal" onclick="closeModal()">&times;</span>
+                </div>
+                <div class="activities-grid" id="modal-activities-grid">
+                    <!-- Activity cards will be cloned here -->
+                </div>
             </div>
-            <div class="activities-grid" id="modal-activities-grid">
-                <!-- Activity cards will be cloned here -->
+
+            <!-- Step 2: Select Participants -->
+            <div class="modal-step-2 hidden">
+                <div class="modal-header">
+                    <h2>Step 2: Who's Participating?</h2>
+                    <span class="close-modal" onclick="closeModal()">&times;</span>
+                </div>
+                <div id="selected-activity-preview"></div>
+                <div class="participant-selector">
+                    <h3>Select Participants</h3>
+                    <div class="participant-options">
+                        <button class="participant-btn" data-participant="all">👨‍👩‍👧‍👦 All Families</button>
+                        <button class="participant-btn" data-participant="older-kids">🧒 Older Kids (8-9) + Adults</button>
+                        <button class="participant-btn" data-participant="younger-kids">👶 Younger Kids (5) + Adults</button>
+                        <button class="participant-btn" data-participant="adults-only">👨‍👩 Adults Only</button>
+                        <button class="participant-btn" data-participant="split-groups">🔀 Split Groups</button>
+                        <button class="participant-btn" data-participant="custom">✏️ Custom</button>
+                    </div>
+                    <div id="custom-participants" style="display: none; margin-top: 15px;">
+                        <input type="text" id="custom-participant-input" placeholder="Enter participant details..."
+                               style="width: 100%; padding: 12px; border: 2px solid #d1fae5; border-radius: 8px; font-size: 1em;">
+                    </div>
+                    <button class="confirm-activity-btn" onclick="confirmActivityWithParticipants()">
+                        ✓ Add to Itinerary
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -709,6 +841,17 @@
         };
 
         let currentDay = null;
+        let selectedActivityId = null;
+        let selectedParticipants = [];
+
+        const participantLabels = {
+            'all': '👨‍👩‍👧‍👦 All Families',
+            'older-kids': '🧒 Older Kids (8-9) + Adults',
+            'younger-kids': '👶 Younger Kids (5) + Adults',
+            'adults-only': '👨‍👩 Adults Only',
+            'split-groups': '🔀 Split Groups',
+            'custom': '✏️ Custom'
+        };
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -752,15 +895,33 @@
             }
 
             dayDiv.innerHTML = '';
-            itinerary[dayKey].forEach((activityId, index) => {
+            itinerary[dayKey].forEach((item, index) => {
+                // Support both old format (just ID) and new format (object with participants)
+                const activityId = typeof item === 'object' ? item.activityId : item;
+                const participants = typeof item === 'object' ? item.participants : [];
+
                 const activity = activities.find(a => a.id === activityId);
                 if (!activity) return;
+
+                // Generate participant badges
+                let participantHTML = '';
+                if (participants && participants.length > 0) {
+                    participantHTML = '<div class="participants-display">';
+                    participants.forEach(p => {
+                        const isCustom = !participantLabels[p];
+                        const cssClass = isCustom ? 'participant-custom' : `participant-${p}`;
+                        const label = isCustom ? p : participantLabels[p];
+                        participantHTML += `<span class="participant-badge ${cssClass}">${label}</span>`;
+                    });
+                    participantHTML += '</div>';
+                }
 
                 const activityDiv = document.createElement('div');
                 activityDiv.className = 'selected-activity';
                 activityDiv.innerHTML = `
                     <button class="remove-btn" onclick="removeActivity('${dayKey}', ${index})">Remove</button>
                     <h4>${activity.icon} ${activity.title}</h4>
+                    ${participantHTML}
                     <p><strong>Travel Time:</strong> ${activity.travelTime} | <strong>Duration:</strong> ${activity.duration}</p>
                     <p><strong>Ages:</strong> ${activity.ages} | <strong>Cost:</strong> ${activity.cost}</p>
                     <p style="margin-top: 10px;">${activity.description}</p>
@@ -833,7 +994,14 @@
 
         function openModal(dayKey) {
             currentDay = dayKey;
+            selectedActivityId = null;
+            selectedParticipants = [];
+
             document.getElementById('modal-day-title').textContent = dayKey.replace('day', 'Day ');
+
+            // Show step 1, hide step 2
+            document.querySelector('.modal-step-1').classList.remove('hidden');
+            document.querySelector('.modal-step-2').classList.add('hidden');
 
             const modalGrid = document.getElementById('modal-activities-grid');
             modalGrid.innerHTML = '';
@@ -841,8 +1009,7 @@
             activities.forEach(activity => {
                 const card = createActivityCard(activity);
                 card.addEventListener('click', function() {
-                    addActivityToDay(currentDay, activity.id);
-                    closeModal();
+                    selectActivity(activity.id);
                 });
                 modalGrid.appendChild(card);
             });
@@ -850,14 +1017,102 @@
             document.getElementById('activity-modal').style.display = 'block';
         }
 
+        function selectActivity(activityId) {
+            selectedActivityId = activityId;
+            showParticipantSelector();
+        }
+
+        function showParticipantSelector() {
+            const activity = activities.find(a => a.id === selectedActivityId);
+            if (!activity) return;
+
+            // Hide step 1, show step 2
+            document.querySelector('.modal-step-1').classList.add('hidden');
+            document.querySelector('.modal-step-2').classList.remove('hidden');
+
+            // Show activity preview
+            const preview = document.getElementById('selected-activity-preview');
+            preview.innerHTML = `
+                <div style="background: #f0fdf4; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #10b981;">
+                    <h3 style="color: #047857; margin-bottom: 10px;">${activity.icon} ${activity.title}</h3>
+                    <p style="color: #059669; font-size: 0.95em;">${activity.description}</p>
+                </div>
+            `;
+
+            // Reset participant selection
+            selectedParticipants = [];
+            document.querySelectorAll('.participant-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.getElementById('custom-participants').style.display = 'none';
+            document.getElementById('custom-participant-input').value = '';
+
+            // Setup participant buttons
+            setupParticipantButtons();
+        }
+
+        function setupParticipantButtons() {
+            document.querySelectorAll('.participant-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const participant = this.dataset.participant;
+
+                    // Toggle selection
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        selectedParticipants = selectedParticipants.filter(p => p !== participant);
+                        if (participant === 'custom') {
+                            document.getElementById('custom-participants').style.display = 'none';
+                        }
+                    } else {
+                        this.classList.add('selected');
+                        if (participant === 'custom') {
+                            document.getElementById('custom-participants').style.display = 'block';
+                            document.getElementById('custom-participant-input').focus();
+                        } else {
+                            selectedParticipants.push(participant);
+                        }
+                    }
+                };
+            });
+        }
+
+        function confirmActivityWithParticipants() {
+            // Handle custom participant input
+            const customInput = document.getElementById('custom-participant-input');
+            if (document.querySelector('.participant-btn[data-participant="custom"]').classList.contains('selected')) {
+                const customValue = customInput.value.trim();
+                if (customValue) {
+                    selectedParticipants = selectedParticipants.filter(p => p !== 'custom');
+                    selectedParticipants.push(customValue);
+                }
+            }
+
+            // Add activity with participants
+            if (selectedActivityId && currentDay) {
+                addActivityToDay(currentDay, selectedActivityId, selectedParticipants);
+                closeModal();
+            }
+        }
+
         function closeModal() {
             document.getElementById('activity-modal').style.display = 'none';
             currentDay = null;
+            selectedActivityId = null;
+            selectedParticipants = [];
         }
 
-        function addActivityToDay(dayKey, activityId) {
-            if (!itinerary[dayKey].includes(activityId)) {
-                itinerary[dayKey].push(activityId);
+        function addActivityToDay(dayKey, activityId, participants = []) {
+            // Check if activity already exists (comparing just the activity ID)
+            const exists = itinerary[dayKey].some(item => {
+                const id = typeof item === 'object' ? item.activityId : item;
+                return id === activityId;
+            });
+
+            if (!exists) {
+                itinerary[dayKey].push({
+                    activityId: activityId,
+                    participants: participants
+                });
                 renderDayActivities(dayKey);
                 saveItinerary();
             }
