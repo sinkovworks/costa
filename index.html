@@ -609,19 +609,37 @@
                 </div>
                 <div id="selected-activity-preview"></div>
                 <div class="participant-selector">
-                    <h3>Select Participants</h3>
-                    <div class="participant-options">
-                        <button class="participant-btn" data-participant="all">👨‍👩‍👧‍👦 All Families</button>
-                        <button class="participant-btn" data-participant="older-kids">🧒 Older Kids (8-9) + Adults</button>
-                        <button class="participant-btn" data-participant="younger-kids">👶 Younger Kids (5) + Adults</button>
-                        <button class="participant-btn" data-participant="adults-only">👨‍👩 Adults Only</button>
-                        <button class="participant-btn" data-participant="split-groups">🔀 Split Groups</button>
-                        <button class="participant-btn" data-participant="custom">✏️ Custom</button>
+                    <h3>Who's Participating?</h3>
+                    <div style="margin-bottom: 20px;">
+                        <button class="participant-btn" id="everyone-btn" onclick="selectEveryone()">
+                            👨‍👩‍👧‍👦 Everyone
+                        </button>
                     </div>
-                    <div id="custom-participants" style="display: none; margin-top: 15px;">
-                        <input type="text" id="custom-participant-input" placeholder="Enter participant details..."
-                               style="width: 100%; padding: 12px; border: 2px solid #d1fae5; border-radius: 8px; font-size: 1em;">
+
+                    <div style="text-align: center; margin: 20px 0; color: #6b7280; font-weight: 500;">OR</div>
+
+                    <div style="background: white; padding: 20px; border-radius: 12px; border: 2px solid #d1fae5;">
+                        <h4 style="margin-bottom: 15px; color: #047857; font-size: 1.1em;">Specify Count</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; color: #374151; font-weight: 500;">
+                                    👨‍👩 Adults
+                                </label>
+                                <input type="number" id="adults-count" min="0" value="0"
+                                       style="width: 100%; padding: 12px; border: 2px solid #d1fae5; border-radius: 8px; font-size: 1.1em; text-align: center;"
+                                       oninput="updateSpecificCount()">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; color: #374151; font-weight: 500;">
+                                    👧👦 Kids
+                                </label>
+                                <input type="number" id="kids-count" min="0" value="0"
+                                       style="width: 100%; padding: 12px; border: 2px solid #d1fae5; border-radius: 8px; font-size: 1.1em; text-align: center;"
+                                       oninput="updateSpecificCount()">
+                            </div>
+                        </div>
                     </div>
+
                     <button class="confirm-activity-btn" onclick="confirmActivityWithParticipants()">
                         ✓ Add to Itinerary
                     </button>
@@ -842,16 +860,7 @@
 
         let currentDay = null;
         let selectedActivityId = null;
-        let selectedParticipants = [];
-
-        const participantLabels = {
-            'all': '👨‍👩‍👧‍👦 All Families',
-            'older-kids': '🧒 Older Kids (8-9) + Adults',
-            'younger-kids': '👶 Younger Kids (5) + Adults',
-            'adults-only': '👨‍👩 Adults Only',
-            'split-groups': '🔀 Split Groups',
-            'custom': '✏️ Custom'
-        };
+        let participantMode = null; // 'everyone' or 'specific'
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -898,21 +907,44 @@
             itinerary[dayKey].forEach((item, index) => {
                 // Support both old format (just ID) and new format (object with participants)
                 const activityId = typeof item === 'object' ? item.activityId : item;
-                const participants = typeof item === 'object' ? item.participants : [];
+                const participants = typeof item === 'object' ? item.participants : null;
 
                 const activity = activities.find(a => a.id === activityId);
                 if (!activity) return;
 
                 // Generate participant badges
                 let participantHTML = '';
-                if (participants && participants.length > 0) {
+                if (participants) {
                     participantHTML = '<div class="participants-display">';
-                    participants.forEach(p => {
-                        const isCustom = !participantLabels[p];
-                        const cssClass = isCustom ? 'participant-custom' : `participant-${p}`;
-                        const label = isCustom ? p : participantLabels[p];
-                        participantHTML += `<span class="participant-badge ${cssClass}">${label}</span>`;
-                    });
+
+                    // Handle new format: 'everyone' or {adults, kids}
+                    if (participants === 'everyone') {
+                        participantHTML += '<span class="participant-badge participant-all">👨‍👩‍👧‍👦 Everyone</span>';
+                    } else if (typeof participants === 'object' && !Array.isArray(participants)) {
+                        // New format: {adults: X, kids: Y}
+                        const adults = participants.adults || 0;
+                        const kids = participants.kids || 0;
+                        if (adults > 0 || kids > 0) {
+                            let label = [];
+                            if (adults > 0) label.push(`${adults} adult${adults > 1 ? 's' : ''}`);
+                            if (kids > 0) label.push(`${kids} kid${kids > 1 ? 's' : ''}`);
+                            participantHTML += `<span class="participant-badge participant-custom">👥 ${label.join(' + ')}</span>`;
+                        }
+                    } else if (Array.isArray(participants)) {
+                        // Old format: array of participant types (backwards compatibility)
+                        const oldLabels = {
+                            'all': '👨‍👩‍👧‍👦 All Families',
+                            'older-kids': '🧒 Older Kids (8-9) + Adults',
+                            'younger-kids': '👶 Younger Kids (5) + Adults',
+                            'adults-only': '👨‍👩 Adults Only',
+                            'split-groups': '🔀 Split Groups'
+                        };
+                        participants.forEach(p => {
+                            const cssClass = oldLabels[p] ? `participant-${p}` : 'participant-custom';
+                            const label = oldLabels[p] || p;
+                            participantHTML += `<span class="participant-badge ${cssClass}">${label}</span>`;
+                        });
+                    }
                     participantHTML += '</div>';
                 }
 
@@ -995,7 +1027,7 @@
         function openModal(dayKey) {
             currentDay = dayKey;
             selectedActivityId = null;
-            selectedParticipants = [];
+            participantMode = null;
 
             document.getElementById('modal-day-title').textContent = dayKey.replace('day', 'Day ');
 
@@ -1040,56 +1072,48 @@
             `;
 
             // Reset participant selection
-            selectedParticipants = [];
-            document.querySelectorAll('.participant-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            document.getElementById('custom-participants').style.display = 'none';
-            document.getElementById('custom-participant-input').value = '';
-
-            // Setup participant buttons
-            setupParticipantButtons();
+            participantMode = null;
+            document.getElementById('everyone-btn').classList.remove('selected');
+            document.getElementById('adults-count').value = 0;
+            document.getElementById('kids-count').value = 0;
         }
 
-        function setupParticipantButtons() {
-            document.querySelectorAll('.participant-btn').forEach(btn => {
-                btn.onclick = function() {
-                    const participant = this.dataset.participant;
+        function selectEveryone() {
+            const btn = document.getElementById('everyone-btn');
+            btn.classList.add('selected');
+            participantMode = 'everyone';
 
-                    // Toggle selection
-                    if (this.classList.contains('selected')) {
-                        this.classList.remove('selected');
-                        selectedParticipants = selectedParticipants.filter(p => p !== participant);
-                        if (participant === 'custom') {
-                            document.getElementById('custom-participants').style.display = 'none';
-                        }
-                    } else {
-                        this.classList.add('selected');
-                        if (participant === 'custom') {
-                            document.getElementById('custom-participants').style.display = 'block';
-                            document.getElementById('custom-participant-input').focus();
-                        } else {
-                            selectedParticipants.push(participant);
-                        }
-                    }
-                };
-            });
+            // Reset count inputs
+            document.getElementById('adults-count').value = 0;
+            document.getElementById('kids-count').value = 0;
+        }
+
+        function updateSpecificCount() {
+            const adults = parseInt(document.getElementById('adults-count').value) || 0;
+            const kids = parseInt(document.getElementById('kids-count').value) || 0;
+
+            if (adults > 0 || kids > 0) {
+                participantMode = 'specific';
+                document.getElementById('everyone-btn').classList.remove('selected');
+            } else {
+                participantMode = null;
+            }
         }
 
         function confirmActivityWithParticipants() {
-            // Handle custom participant input
-            const customInput = document.getElementById('custom-participant-input');
-            if (document.querySelector('.participant-btn[data-participant="custom"]').classList.contains('selected')) {
-                const customValue = customInput.value.trim();
-                if (customValue) {
-                    selectedParticipants = selectedParticipants.filter(p => p !== 'custom');
-                    selectedParticipants.push(customValue);
-                }
+            let participants = null;
+
+            if (participantMode === 'everyone') {
+                participants = 'everyone';
+            } else if (participantMode === 'specific') {
+                const adults = parseInt(document.getElementById('adults-count').value) || 0;
+                const kids = parseInt(document.getElementById('kids-count').value) || 0;
+                participants = { adults, kids };
             }
 
             // Add activity with participants
             if (selectedActivityId && currentDay) {
-                addActivityToDay(currentDay, selectedActivityId, selectedParticipants);
+                addActivityToDay(currentDay, selectedActivityId, participants);
                 closeModal();
             }
         }
@@ -1098,10 +1122,10 @@
             document.getElementById('activity-modal').style.display = 'none';
             currentDay = null;
             selectedActivityId = null;
-            selectedParticipants = [];
+            participantMode = null;
         }
 
-        function addActivityToDay(dayKey, activityId, participants = []) {
+        function addActivityToDay(dayKey, activityId, participants = null) {
             // Check if activity already exists (comparing just the activity ID)
             const exists = itinerary[dayKey].some(item => {
                 const id = typeof item === 'object' ? item.activityId : item;
