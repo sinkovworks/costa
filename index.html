@@ -526,6 +526,13 @@
             filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
         }
 
+        .jump-link:hover {
+            background: #10b981;
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
         @media (max-width: 768px) {
             .hero-header h1 {
                 font-size: 2.2em;
@@ -559,6 +566,11 @@
             <p><strong>Families:</strong> 3 families</p>
             <p><strong>Kids' Interests:</strong> Animals, beaches, swimming, nature, forests</p>
             <p><strong>Vibe:</strong> Relaxed pace with mix of adventure and downtime</p>
+            <p style="margin-top: 20px; text-align: center;">
+                <a href="#available-activities" class="jump-link" style="color: #10b981; text-decoration: none; font-weight: 600; font-size: 1.1em; display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border: 2px solid #10b981; border-radius: 25px; transition: all 0.3s ease;">
+                    ⬇️ Jump to Activity List
+                </a>
+            </p>
         </div>
 
         <h2 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">Plan Your Itinerary</h2>
@@ -569,7 +581,7 @@
 
         <button class="print-btn" onclick="window.print()">📋 Print Itinerary</button>
 
-        <h2 style="text-align: center; margin: 40px 0 20px; color: #2c3e50;">Available Activities</h2>
+        <h2 id="available-activities" style="text-align: center; margin: 40px 0 20px; color: #2c3e50; scroll-margin-top: 20px;">Available Activities</h2>
 
         <div class="category-filter">
             <button class="filter-btn active" data-category="all">All Activities</button>
