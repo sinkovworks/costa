@@ -659,7 +659,8 @@
                 travelTime: "0 min (on-site)",
                 ages: "All ages (0+)",
                 cost: "Free (included)",
-                duration: "Full day"
+                duration: "Full day",
+                website: "https://www.hyatt.com/andaz/ptyan-andaz-costa-rica-resort-at-peninsula-papagayo"
             },
             {
                 id: 2,
@@ -670,7 +671,8 @@
                 travelTime: "0 min (on-site)",
                 ages: "4-12 years",
                 cost: "Free (included)",
-                duration: "Flexible (hourly)"
+                duration: "Flexible (hourly)",
+                website: "https://www.hyatt.com/andaz/ptyan-andaz-costa-rica-resort-at-peninsula-papagayo"
             },
             {
                 id: 3,
@@ -681,7 +683,8 @@
                 travelTime: "0 min (on-site)",
                 ages: "All ages (5+)",
                 cost: "Included/Nominal fee",
-                duration: "2-3 hours"
+                duration: "2-3 hours",
+                website: "https://www.hyatt.com/andaz/ptyan-andaz-costa-rica-resort-at-peninsula-papagayo"
             },
             {
                 id: 4,
@@ -692,7 +695,8 @@
                 travelTime: "45-60 min drive",
                 ages: "All ages (recommended 5+)",
                 cost: "$16 adults, $6 kids (2-12) + $30-125 for guided tour with hot springs",
-                duration: "Full day (6-8 hours)"
+                duration: "Full day (6-8 hours)",
+                website: "https://www.sinac.go.cr/"
             },
             {
                 id: 5,
@@ -703,7 +707,8 @@
                 travelTime: "50 min drive",
                 ages: "All ages (5+)",
                 cost: "$30 adults, $25 kids",
-                duration: "Half day (3-4 hours)"
+                duration: "Half day (3-4 hours)",
+                website: "https://www.guachipelin.com/"
             },
             {
                 id: 6,
@@ -714,7 +719,8 @@
                 travelTime: "Pickup from resort",
                 ages: "All ages (3+)",
                 cost: "$70-95 per person (group), $869-1174 private boat",
-                duration: "4 hours"
+                duration: "4 hours",
+                website: "https://www.papagayotours.com/"
             },
             {
                 id: 7,
@@ -725,7 +731,8 @@
                 travelTime: "35-45 min drive",
                 ages: "All ages (safari), 8+ (zipline)",
                 cost: "$50-80 per person (varies by activities)",
-                duration: "Half to full day"
+                duration: "Half to full day",
+                website: "https://ponderosaadventurepark.com/"
             },
             {
                 id: 8,
@@ -857,7 +864,8 @@
                 travelTime: "90-120 min drive",
                 ages: "All ages (5+ recommended)",
                 cost: "$12 adults, $5 kids (self-guided) or $85-110 per person (guided tour with lunch)",
-                duration: "Full day (6-8 hours)"
+                duration: "Full day (6-8 hours)",
+                website: "https://www.sinac.go.cr/"
             },
             {
                 id: 20,
@@ -868,7 +876,8 @@
                 travelTime: "35-45 min drive",
                 ages: "3+ years (with parent)",
                 cost: "$60-70 per person",
-                duration: "Half day (3-4 hours)"
+                duration: "Half day (3-4 hours)",
+                website: "https://www.congocanopy.com/"
             },
             {
                 id: 21,
@@ -879,7 +888,8 @@
                 travelTime: "40-50 min drive",
                 ages: "All ages (5+ for zipline)",
                 cost: "$63-78 per person (varies by age and package)",
-                duration: "Full day (6-8 hours)"
+                duration: "Full day (6-8 hours)",
+                website: "https://diamanteecoadventurepark.com/"
             },
             {
                 id: 22,
@@ -890,7 +900,8 @@
                 travelTime: "3 hours drive",
                 ages: "5+ years",
                 cost: "$95-120 per person (full day tour with meals)",
-                duration: "Full day (12 hours with travel)"
+                duration: "Full day (12 hours with travel)",
+                website: "https://monteverdetourscr.com/"
             },
             {
                 id: 23,
@@ -901,7 +912,8 @@
                 travelTime: "25-30 min drive",
                 ages: "All ages (4+)",
                 cost: "$38-40 per person",
-                duration: "2 hours"
+                duration: "2 hours",
+                website: "https://cafetioleo.com/"
             },
             {
                 id: 24,
@@ -912,7 +924,8 @@
                 travelTime: "15-20 min drive",
                 ages: "All ages (5+)",
                 cost: "$35-45 per person",
-                duration: "3-4 hours"
+                duration: "3-4 hours",
+                website: "https://cafetioleo.com/"
             },
             {
                 id: 25,
@@ -923,7 +936,8 @@
                 travelTime: "50 min drive",
                 ages: "All ages (6+)",
                 cost: "$45-65 per person",
-                duration: "3 hours (cooking class only)"
+                duration: "3 hours (cooking class only)",
+                website: "https://www.guachipelin.com/"
             },
             {
                 id: 26,
@@ -934,7 +948,8 @@
                 travelTime: "30-40 min drive",
                 ages: "All ages (5+)",
                 cost: "$30-40 per person",
-                duration: "2-3 hours"
+                duration: "2-3 hours",
+                website: "https://www.chocolateandcoffeefarmtourdonjorge.com/"
             }
         ];
 
@@ -1036,6 +1051,15 @@
                     participantHTML += '</div>';
                 }
 
+                const websiteLinkHTML = activity.website
+                    ? `<p style="margin-top: 10px;">
+                         <a href="${activity.website}" target="_blank" rel="noopener noreferrer"
+                            style="color: #10b981; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+                           🔗 Visit Website
+                         </a>
+                       </p>`
+                    : '';
+
                 const activityDiv = document.createElement('div');
                 activityDiv.className = 'selected-activity';
                 activityDiv.innerHTML = `
@@ -1045,6 +1069,7 @@
                     <p><strong>Travel Time:</strong> ${activity.travelTime} | <strong>Duration:</strong> ${activity.duration}</p>
                     <p><strong>Ages:</strong> ${activity.ages} | <strong>Cost:</strong> ${activity.cost}</p>
                     <p style="margin-top: 10px;">${activity.description}</p>
+                    ${websiteLinkHTML}
                 `;
                 dayDiv.appendChild(activityDiv);
             });
@@ -1072,6 +1097,16 @@
                 `<span class="activity-tag tag-${cat}">${cat}</span>`
             ).join(' ');
 
+            const websiteHTML = activity.website
+                ? `<div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb;">
+                     <a href="${activity.website}" target="_blank" rel="noopener noreferrer"
+                        style="color: #10b981; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;"
+                        onclick="event.stopPropagation();">
+                       🔗 Visit Website
+                     </a>
+                   </div>`
+                : '';
+
             card.innerHTML = `
                 <div class="activity-icon">${activity.icon}</div>
                 ${tags}
@@ -1095,6 +1130,7 @@
                         <div class="detail-value">${activity.duration}</div>
                     </div>
                 </div>
+                ${websiteHTML}
             `;
 
             return card;
