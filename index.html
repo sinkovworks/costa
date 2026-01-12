@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costa Rica Family Trip Planner - Andaz Peninsula Papagayo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        .trip-info {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4caf50;
+        }
+
+        .trip-info h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .activity-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .activity-card.selected {
+            border-color: #4caf50;
+            background: #f1f8f4;
+        }
+
+        .activity-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .tag-resort { background: #e3f2fd; color: #1976d2; }
+        .tag-adventure { background: #fff3e0; color: #f57c00; }
+        .tag-beach { background: #e0f2f1; color: #00897b; }
+        .tag-wildlife { background: #f3e5f5; color: #7b1fa2; }
+        .tag-older-kids { background: #ffebee; color: #c62828; }
+        .tag-relaxing { background: #e8f5e9; color: #388e3c; }
+
+        .activity-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .activity-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .activity-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .detail-item {
+            font-size: 0.9em;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .detail-value {
+            color: #333;
+        }
+
+        .day-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #fafafa;
+            border-radius: 15px;
+            border: 2px dashed #bdbdbd;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .day-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+        }
+
+        .day-activities {
+            min-height: 100px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .selected-activity {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #4caf50;
+        }
+
+        .selected-activity h4 {
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+
+        .remove-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            font-size: 0.85em;
+        }
+
+        .remove-btn:hover {
+            background: #d32f2f;
+        }
+
+        .add-activity-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        .add-activity-btn:hover {
+            background: #5568d3;
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .print-btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            display: block;
+            margin: 30px auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .print-btn:hover {
+            background: #388e3c;
+        }
+
+        .empty-day {
+            color: #999;
+            font-style: italic;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .add-activity-btn, .remove-btn, .print-btn, .filter-btn {
+                display: none;
+            }
+        }
+
+        .activity-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌴 Costa Rica Family Adventure 🌴</h1>
+        <p class="subtitle">Andaz Peninsula Papagayo Resort - June 2026</p>
+
+        <div class="trip-info">
+            <h3>Trip Details</h3>
+            <p><strong>Duration:</strong> 5 Nights / 6 Days</p>
+            <p><strong>Families:</strong> 3 families with kids ages 5, 8, 9, plus your family</p>
+            <p><strong>Kids' Interests:</strong> Animals, beaches, swimming, nature, forests</p>
+            <p><strong>Vibe:</strong> Relaxed pace with mix of adventure and downtime</p>
+        </div>
+
+        <h2 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">Plan Your Itinerary</h2>
+
+        <div id="itinerary">
+            <!-- Day sections will be generated here -->
+        </div>
+
+        <button class="print-btn" onclick="window.print()">📋 Print Itinerary</button>
+
+        <h2 style="text-align: center; margin: 40px 0 20px; color: #2c3e50;">Available Activities</h2>
+
+        <div class="category-filter">
+            <button class="filter-btn active" data-category="all">All Activities</button>
+            <button class="filter-btn" data-category="resort">Resort</button>
+            <button class="filter-btn" data-category="beach">Beach</button>
+            <button class="filter-btn" data-category="adventure">Adventure</button>
+            <button class="filter-btn" data-category="wildlife">Wildlife</button>
+            <button class="filter-btn" data-category="older-kids">Older Kids</button>
+            <button class="filter-btn" data-category="relaxing">Relaxing</button>
+        </div>
+
+        <div class="activities-grid" id="activities-grid">
+            <!-- Activity cards will be generated here -->
+        </div>
+    </div>
+
+    <!-- Modal for adding activities -->
+    <div id="activity-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select Activity for <span id="modal-day-title"></span></h2>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="activities-grid" id="modal-activities-grid">
+                <!-- Activity cards will be cloned here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const activities = [
+            {
+                id: 1,
+                icon: "🏖️",
+                title: "Resort Beach Day",
+                category: ["resort", "beach", "relaxing"],
+                description: "Enjoy the three pristine beaches at the resort in Culebra Bay. Very calm waters ideal for young children. Complimentary kayaks, snorkeling equipment, stand-up paddleboards, and beach games available at Casa de Playa beach club.",
+                travelTime: "0 min (on-site)",
+                ages: "All ages (0+)",
+                cost: "Free (included)",
+                duration: "Full day"
+            },
+            {
+                id: 2,
+                icon: "🎨",
+                title: "Cambi Kids' Club",
+                category: ["resort", "relaxing"],
+                description: "Complimentary kids' club for ages 4-12 with storytelling, arts and crafts, games, and making new friends. Indoor and outdoor play areas with spectacular views. Great for giving parents some alone time!",
+                travelTime: "0 min (on-site)",
+                ages: "4-12 years",
+                cost: "Free (included)",
+                duration: "Flexible (hourly)"
+            },
+            {
+                id: 3,
+                icon: "🔬",
+                title: "Papagayo Explorers Program",
+                category: ["resort", "wildlife"],
+                description: "Join experts in discovering Costa Rica's natural wonders through hands-on experiences. Mini Explorers learn about the micro world and Peninsula Papagayo ecosystems. Educational and fun!",
+                travelTime: "0 min (on-site)",
+                ages: "All ages (5+)",
+                cost: "Included/Nominal fee",
+                duration: "2-3 hours"
+            },
+            {
+                id: 4,
+                icon: "🌋",
+                title: "Rincón de la Vieja National Park",
+                category: ["adventure", "wildlife"],
+                description: "Hike scenic trails to waterfalls, see boiling mud pots and fumaroles on the Las Pailas Trail. Spot monkeys, exotic birds, and wildlife. Easy family-friendly trails with minimal elevation. Park includes hot springs access at nearby resorts.",
+                travelTime: "45-60 min drive",
+                ages: "All ages (recommended 5+)",
+                cost: "$16 adults, $6 kids (2-12) + $30-125 for guided tour with hot springs",
+                duration: "Full day (6-8 hours)"
+            },
+            {
+                id: 5,
+                icon: "💦",
+                title: "Hot Springs & Mud Baths",
+                category: ["adventure", "relaxing"],
+                description: "Soak in natural hot springs and enjoy volcanic mud baths at Hotel Hacienda Guachipelín near Rincón de la Vieja. Day passes include hot springs, mud baths, and nature trails. Can combine with volcano park visit.",
+                travelTime: "50 min drive",
+                ages: "All ages (5+)",
+                cost: "$30 adults, $25 kids",
+                duration: "Half day (3-4 hours)"
+            },
+            {
+                id: 6,
+                icon: "⛵",
+                title: "Catamaran Snorkeling Tour",
+                category: ["beach", "wildlife"],
+                description: "Sail the Gulf of Papagayo on a catamaran with snorkeling stops. See dolphins, whales, sea turtles, and colorful fish. Includes lunch, drinks, snorkeling gear, and life vests. Morning or sunset tours available.",
+                travelTime: "Pickup from resort",
+                ages: "All ages (3+)",
+                cost: "$70-95 per person (group), $869-1174 private boat",
+                duration: "4 hours"
+            },
+            {
+                id: 7,
+                icon: "🐆",
+                title: "Ponderosa Safari & Adventure Park",
+                category: ["wildlife", "adventure"],
+                description: "Safari tour where you can feed zebras, giraffes, and African cattle! Also offers waterfall visits, ziplines, kayaking, and horseback riding. Located just outside Liberia. A unique Costa Rican safari experience.",
+                travelTime: "35-45 min drive",
+                ages: "All ages (safari), 8+ (zipline)",
+                cost: "$50-80 per person (varies by activities)",
+                duration: "Half to full day"
+            },
+            {
+                id: 8,
+                icon: "🐒",
+                title: "Las Pumas Rescue Center",
+                category: ["wildlife"],
+                description: "Wildlife rehabilitation center where kids can see rescued rainforest animals and birds up close. Educational experience supporting animal conservation. See jaguars, pumas, monkeys, and exotic birds.",
+                travelTime: "30 min drive",
+                ages: "All ages (3+)",
+                cost: "$15-25 per person",
+                duration: "2-3 hours"
+            },
+            {
+                id: 9,
+                icon: "🌊",
+                title: "Beach Hopping: Conchal & Tamarindo",
+                category: ["beach", "relaxing"],
+                description: "Visit Playa Conchal (famous for shell-sand beach) and Tamarindo (surf town with shops and restaurants). Private tour with bilingual guide, fruits & water. Customize the day at your own pace. Great for beach variety!",
+                travelTime: "20-35 min to beaches",
+                ages: "All ages (0+)",
+                cost: "$60-100 per person for guided tour, or drive yourself",
+                duration: "Full day (6-8 hours)"
+            },
+            {
+                id: 10,
+                icon: "🏄",
+                title: "Surf Lessons in Tamarindo",
+                category: ["adventure", "beach", "older-kids"],
+                description: "Beginner-friendly surf lessons at Tamarindo Beach. Gentle waves and sandy bottom make it perfect for kids and families learning to surf. Professional instructors provide boards and instruction.",
+                travelTime: "35 min drive",
+                ages: "8+ recommended",
+                cost: "$70 per person",
+                duration: "2-3 hours"
+            },
+            {
+                id: 11,
+                icon: "🐊",
+                title: "Palo Verde National Park Boat Safari",
+                category: ["wildlife", "adventure"],
+                description: "Boat safari on the Tempisque River to spot howler monkeys, capuchin monkeys, crocodiles, iguanas, and exotic birds. 20-meter boardwalk at Laguna Palo Verde for wildlife viewing. Amazing birdwatching!",
+                travelTime: "50-60 min drive",
+                ages: "All ages (4+)",
+                cost: "$50-75 per person",
+                duration: "Half day (4-5 hours)"
+            },
+            {
+                id: 12,
+                icon: "💧",
+                title: "Llanos de Cortez Waterfall",
+                category: ["adventure", "relaxing"],
+                description: "Beautiful, easily accessible waterfall perfect for families. Short walk to a wide waterfall with a natural swimming pool. Great for cooling off and playing in the water. Less crowded than other waterfalls.",
+                travelTime: "40 min drive",
+                ages: "All ages (3+)",
+                cost: "$5 entrance fee",
+                duration: "2-4 hours"
+            },
+            {
+                id: 13,
+                icon: "🐴",
+                title: "Horseback Riding on the Beach",
+                category: ["adventure", "beach"],
+                description: "Horseback ride along the beach and through coastal trails. Suitable for beginners with gentle horses. Experience includes riding through forests and along the shoreline. Magical sunset rides available.",
+                travelTime: "20-30 min drive",
+                ages: "8+ years",
+                cost: "$60-80 per person",
+                duration: "2-3 hours"
+            },
+            {
+                id: 14,
+                icon: "🎣",
+                title: "Resort Pool & Activities Day",
+                category: ["resort", "relaxing"],
+                description: "Relaxing day at the resort's beautiful pools with poolside service. Let the kids swim while adults relax with a book. Take advantage of resort amenities, spa, and restaurants. Perfect rest day between adventures!",
+                travelTime: "0 min (on-site)",
+                ages: "All ages (0+)",
+                cost: "Free (included)",
+                duration: "Full day"
+            },
+            {
+                id: 15,
+                icon: "🌲",
+                title: "Papagayo Nature Center",
+                category: ["wildlife", "resort"],
+                description: "Guided nature walk where a naturalist shows native 'critters' and teaches about local ecosystems. Highly rated by families as a trip highlight. Educational and interactive experience right near the resort.",
+                travelTime: "10-15 min drive",
+                ages: "All ages (5+)",
+                cost: "$30-50 per person",
+                duration: "2-3 hours"
+            },
+            {
+                id: 16,
+                icon: "🍽️",
+                title: "Restaurant Day in Tamarindo",
+                category: ["beach", "relaxing"],
+                description: "Explore the surf town of Tamarindo with its beach shops, restaurants, and laid-back vibe. Try local cuisine, walk the beach, and enjoy the town atmosphere. Great for a casual, unstructured day.",
+                travelTime: "35 min drive",
+                ages: "All ages (0+)",
+                cost: "Meals only (budget-friendly to upscale)",
+                duration: "Half to full day"
+            },
+            {
+                id: 17,
+                icon: "🌅",
+                title: "Sunset Catamaran Cruise",
+                category: ["beach", "relaxing"],
+                description: "Evening catamaran sail to watch the spectacular Costa Rican sunset. More relaxed than the snorkeling version. Includes drinks, snacks, and music. Romantic option while kids can still enjoy the boat ride.",
+                travelTime: "Pickup from resort",
+                ages: "All ages (0+)",
+                cost: "$70-95 per person",
+                duration: "3-4 hours (late afternoon)"
+            },
+            {
+                id: 18,
+                icon: "🏊",
+                title: "Private Beach Day with Setup",
+                category: ["beach", "relaxing"],
+                description: "Resort can arrange a private beach setup with umbrellas, chairs, coolers, and water toys at one of the secluded beaches. Have a private family beach day without crowds. Staff can bring lunch and drinks.",
+                travelTime: "0-5 min (on-site)",
+                ages: "All ages (0+)",
+                cost: "$100-200 setup fee",
+                duration: "Full day"
+            }
+        ];
+
+        let itinerary = {
+            day1: [],
+            day2: [],
+            day3: [],
+            day4: [],
+            day5: []
+        };
+
+        let currentDay = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderItinerary();
+            renderActivities();
+            setupFilters();
+            loadItinerary();
+        });
+
+        function renderItinerary() {
+            const itineraryDiv = document.getElementById('itinerary');
+            itineraryDiv.innerHTML = '';
+
+            for (let i = 1; i <= 5; i++) {
+                const dayKey = `day${i}`;
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'day-section';
+                dayDiv.innerHTML = `
+                    <div class="day-header">
+                        <h3 class="day-title">Day ${i}</h3>
+                        <button class="add-activity-btn" onclick="openModal('${dayKey}')">+ Add Activity</button>
+                    </div>
+                    <div class="day-activities" id="${dayKey}">
+                        ${itinerary[dayKey].length === 0 ? '<p class="empty-day">No activities planned yet. Click "Add Activity" to get started!</p>' : ''}
+                    </div>
+                `;
+                itineraryDiv.appendChild(dayDiv);
+
+                // Render selected activities for this day
+                renderDayActivities(dayKey);
+            }
+        }
+
+        function renderDayActivities(dayKey) {
+            const dayDiv = document.getElementById(dayKey);
+            if (!dayDiv) return;
+
+            if (itinerary[dayKey].length === 0) {
+                dayDiv.innerHTML = '<p class="empty-day">No activities planned yet. Click "Add Activity" to get started!</p>';
+                return;
+            }
+
+            dayDiv.innerHTML = '';
+            itinerary[dayKey].forEach((activityId, index) => {
+                const activity = activities.find(a => a.id === activityId);
+                if (!activity) return;
+
+                const activityDiv = document.createElement('div');
+                activityDiv.className = 'selected-activity';
+                activityDiv.innerHTML = `
+                    <button class="remove-btn" onclick="removeActivity('${dayKey}', ${index})">Remove</button>
+                    <h4>${activity.icon} ${activity.title}</h4>
+                    <p><strong>Travel Time:</strong> ${activity.travelTime} | <strong>Duration:</strong> ${activity.duration}</p>
+                    <p><strong>Ages:</strong> ${activity.ages} | <strong>Cost:</strong> ${activity.cost}</p>
+                    <p style="margin-top: 10px;">${activity.description}</p>
+                `;
+                dayDiv.appendChild(activityDiv);
+            });
+        }
+
+        function renderActivities(category = 'all') {
+            const grid = document.getElementById('activities-grid');
+            grid.innerHTML = '';
+
+            const filtered = category === 'all'
+                ? activities
+                : activities.filter(a => a.category.includes(category));
+
+            filtered.forEach(activity => {
+                const card = createActivityCard(activity);
+                grid.appendChild(card);
+            });
+        }
+
+        function createActivityCard(activity) {
+            const card = document.createElement('div');
+            card.className = 'activity-card';
+
+            const tags = activity.category.map(cat =>
+                `<span class="activity-tag tag-${cat}">${cat}</span>`
+            ).join(' ');
+
+            card.innerHTML = `
+                <div class="activity-icon">${activity.icon}</div>
+                ${tags}
+                <div class="activity-title">${activity.title}</div>
+                <div class="activity-description">${activity.description}</div>
+                <div class="activity-details">
+                    <div class="detail-item">
+                        <div class="detail-label">🚗 Travel Time:</div>
+                        <div class="detail-value">${activity.travelTime}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">👨‍👩‍👧‍👦 Ages:</div>
+                        <div class="detail-value">${activity.ages}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">💵 Cost:</div>
+                        <div class="detail-value">${activity.cost}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">⏱️ Duration:</div>
+                        <div class="detail-value">${activity.duration}</div>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function setupFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const category = this.dataset.category;
+                    renderActivities(category);
+                });
+            });
+        }
+
+        function openModal(dayKey) {
+            currentDay = dayKey;
+            document.getElementById('modal-day-title').textContent = dayKey.replace('day', 'Day ');
+
+            const modalGrid = document.getElementById('modal-activities-grid');
+            modalGrid.innerHTML = '';
+
+            activities.forEach(activity => {
+                const card = createActivityCard(activity);
+                card.addEventListener('click', function() {
+                    addActivityToDay(currentDay, activity.id);
+                    closeModal();
+                });
+                modalGrid.appendChild(card);
+            });
+
+            document.getElementById('activity-modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('activity-modal').style.display = 'none';
+            currentDay = null;
+        }
+
+        function addActivityToDay(dayKey, activityId) {
+            if (!itinerary[dayKey].includes(activityId)) {
+                itinerary[dayKey].push(activityId);
+                renderDayActivities(dayKey);
+                saveItinerary();
+            }
+        }
+
+        function removeActivity(dayKey, index) {
+            itinerary[dayKey].splice(index, 1);
+            renderDayActivities(dayKey);
+            saveItinerary();
+        }
+
+        function saveItinerary() {
+            localStorage.setItem('costaRicaItinerary', JSON.stringify(itinerary));
+        }
+
+        function loadItinerary() {
+            const saved = localStorage.getItem('costaRicaItinerary');
+            if (saved) {
+                itinerary = JSON.parse(saved);
+                renderItinerary();
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('activity-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
