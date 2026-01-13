@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Costa Rica Family Trip Planner - Andaz Peninsula Papagayo</title>
+    <title>Costa Rica Family Trip Planner - Nayara Gardens</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -40,6 +40,43 @@
             z-index: 0;
         }
 
+        .top-nav {
+            background: rgba(15, 155, 142, 0.95);
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        .top-nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
+        }
+
+        .nav-link.active {
+            background: white;
+            color: #0f9b8e;
+        }
+
         .hero-header {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.95) 0%, rgba(5, 150, 105, 0.95) 100%);
             padding: 60px 20px;
@@ -50,7 +87,7 @@
         }
 
         .hero-header::before {
-            content: "🌴 🦜 🌺 🐒 🌊 ☀️ 🦋 🌴 🦜 🌺 🐒 🌊 ☀️ 🦋";
+            content: "🌋 🦥 🌺 🐸 🌿 ☀️ 🦜 🌋 🦥 🌺 🐸 🌿 ☀️ 🦜";
             position: absolute;
             top: 10px;
             left: 0;
@@ -181,10 +218,11 @@
 
         .tag-resort { background: #e3f2fd; color: #1976d2; }
         .tag-adventure { background: #fff3e0; color: #f57c00; }
-        .tag-beach { background: #e0f2f1; color: #00897b; }
         .tag-wildlife { background: #f3e5f5; color: #7b1fa2; }
-        .tag-older-kids { background: #ffebee; color: #c62828; }
+        .tag-hot-springs { background: #ffebee; color: #c62828; }
+        .tag-older-kids { background: #fce7f3; color: #be185d; }
         .tag-relaxing { background: #e8f5e9; color: #388e3c; }
+        .tag-cultural { background: #fff9c4; color: #f57f17; }
 
         .activity-title {
             font-size: 1.3em;
@@ -533,43 +571,6 @@
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
-        .top-nav {
-            background: rgba(15, 155, 142, 0.95);
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 10;
-        }
-
-        .top-nav-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: white;
-        }
-
-        .nav-link.active {
-            background: white;
-            color: #0f9b8e;
-        }
-
         @media (max-width: 768px) {
             .hero-header h1 {
                 font-size: 2.2em;
@@ -592,24 +593,24 @@
 <body>
     <div class="top-nav">
         <div class="top-nav-content">
-            <a href="index.html" class="nav-link active">🏖️ Andaz Peninsula Papagayo</a>
-            <a href="nayara.html" class="nav-link">🌋 Nayara Gardens</a>
+            <a href="index.html" class="nav-link">🏖️ Andaz Peninsula Papagayo</a>
+            <a href="nayara.html" class="nav-link active">🌋 Nayara Gardens</a>
         </div>
     </div>
 
     <div class="hero-header">
         <h1>Costa Rica Family Adventure</h1>
-        <p class="subtitle">Andaz Peninsula Papagayo Resort • June 2026</p>
+        <p class="subtitle">Nayara Gardens • La Fortuna, Arenal</p>
     </div>
 
     <div class="container">
         <div class="content-wrapper">
             <div class="trip-info">
             <h3>Trip Details</h3>
-            <p><strong>Duration:</strong> 5 Nights / 6 Days</p>
+            <p><strong>Duration:</strong> 4 Nights / 5 Days</p>
             <p><strong>Families:</strong> 3 families</p>
-            <p><strong>Kids' Interests:</strong> Animals, beaches, swimming, nature, forests</p>
-            <p><strong>Vibe:</strong> Relaxed pace with mix of adventure and downtime</p>
+            <p><strong>Kids' Interests:</strong> Animals, nature, adventure, volcanoes, hot springs</p>
+            <p><strong>Vibe:</strong> Adventure-focused with rainforest wildlife and volcano experiences</p>
             <p style="margin-top: 20px; text-align: center;">
                 <a href="#available-activities" class="jump-link" style="color: #10b981; text-decoration: none; font-weight: 600; font-size: 1.1em; display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border: 2px solid #10b981; border-radius: 25px; transition: all 0.3s ease;">
                     ⬇️ Jump to Activity List
@@ -630,10 +631,10 @@
         <div class="category-filter">
             <button class="filter-btn active" data-category="all">All Activities</button>
             <button class="filter-btn" data-category="resort">Resort</button>
-            <button class="filter-btn" data-category="beach">Beach</button>
-            <button class="filter-btn" data-category="adventure">Adventure</button>
             <button class="filter-btn" data-category="wildlife">Wildlife</button>
-            <button class="filter-btn" data-category="older-kids">Older Kids</button>
+            <button class="filter-btn" data-category="adventure">Adventure</button>
+            <button class="filter-btn" data-category="hot-springs">Hot Springs</button>
+            <button class="filter-btn" data-category="cultural">Cultural</button>
             <button class="filter-btn" data-category="relaxing">Relaxing</button>
         </div>
 
@@ -708,330 +709,263 @@
         const activities = [
             {
                 id: 1,
-                icon: "🏖️",
-                title: "Resort Beach Day",
-                category: ["resort", "beach", "relaxing"],
-                description: "Enjoy the three pristine beaches at the resort in Culebra Bay. Very calm waters ideal for young children. Complimentary kayaks, snorkeling equipment, stand-up paddleboards, and beach games available at Casa de Playa beach club.",
+                icon: "🌴",
+                title: "Nayara Gardens Resort Activities",
+                category: ["resort", "wildlife", "relaxing"],
+                description: "Enjoy the resort's spa, gardens with indigenous flora and fauna, multiple pools, and resident sloths living on property. Complimentary daily activities include sloth sanctuary tours, early morning bird-watching walks, and nighttime frog spotting tours.",
                 travelTime: "0 min (on-site)",
                 ages: "All ages (0+)",
-                cost: "Free (included)",
-                duration: "Full day",
-                website: "https://www.hyatt.com/andaz/ptyan-andaz-costa-rica-resort-at-peninsula-papagayo",
+                cost: "Included with stay",
+                duration: "Flexible",
+                website: "https://nayaragardens.com/",
                 destination: null
             },
             {
                 id: 2,
-                icon: "🎨",
-                title: "Cambi Kids' Club",
-                category: ["resort", "relaxing"],
-                description: "Complimentary kids' club for ages 4-12 with storytelling, arts and crafts, games, and making new friends. Indoor and outdoor play areas with spectacular views. Great for giving parents some alone time!",
-                travelTime: "0 min (on-site)",
-                ages: "4-12 years",
-                cost: "Free (included)",
-                duration: "Flexible (hourly)",
-                website: "https://www.hyatt.com/andaz/ptyan-andaz-costa-rica-resort-at-peninsula-papagayo",
-                destination: null
+                icon: "🦥",
+                title: "Bogarin Trail - Sloth Watching",
+                category: ["wildlife", "relaxing"],
+                description: "Easy 2km loop trail with 25+ sloths living in the reserve. Expert guides help spot 4-6 sloths on typical tours. Fully wheelchair accessible, right in La Fortuna town. Perfect relaxed wildlife experience for all fitness levels.",
+                travelTime: "15 min drive",
+                ages: "All ages (0+)",
+                cost: "$20-30 per person guided; $15 self-guided",
+                duration: "2 hours",
+                website: "https://bogarintrail.com/",
+                destination: "Bogarin Trail, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 3,
-                icon: "🔬",
-                title: "Papagayo Explorers Program",
-                category: ["resort", "wildlife"],
-                description: "Join experts in discovering Costa Rica's natural wonders through hands-on experiences. Mini Explorers learn about the micro world and Peninsula Papagayo ecosystems. Educational and fun!",
-                travelTime: "0 min (on-site)",
-                ages: "All ages (5+)",
-                cost: "Included/Nominal fee",
-                duration: "2-3 hours",
-                website: "https://www.hyatt.com/andaz/ptyan-andaz-costa-rica-resort-at-peninsula-papagayo",
-                destination: null
+                icon: "🦋",
+                title: "Ecocentro Danaus - Butterfly Garden",
+                category: ["wildlife", "relaxing"],
+                description: "Small 7-acre nature reserve with butterfly garden (30 species), reptile/frog pond, and easy trails. Day tours great for butterflies and birds; night tours excellent for red-eyed tree frogs and nocturnal wildlife. Easy flat loop perfect for young kids.",
+                travelTime: "15-20 min drive",
+                ages: "All ages (3+)",
+                cost: "$25-35 per person (day); $35-45 (night tour)",
+                duration: "1.5-2 hours",
+                website: "https://ecoterracostarica.com/",
+                destination: "Ecocentro Danaus, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 4,
-                icon: "🌋",
-                title: "Rincón de la Vieja National Park",
-                category: ["adventure", "wildlife"],
-                description: "Hike scenic trails to waterfalls, see boiling mud pots and fumaroles on the Las Pailas Trail. Spot monkeys, exotic birds, and wildlife. Easy family-friendly trails with minimal elevation. Park includes hot springs access at nearby resorts.",
-                travelTime: "45-60 min drive",
-                ages: "All ages (recommended 5+)",
-                cost: "$16 adults, $6 kids (2-12) + $30-125 for guided tour with hot springs",
-                duration: "Full day (6-8 hours)",
-                website: "https://www.sinac.go.cr/",
-                destination: "Rincon de la Vieja National Park, Guanacaste, Costa Rica"
+                icon: "🌉",
+                title: "Mistico Hanging Bridges",
+                category: ["wildlife", "adventure"],
+                description: "Walk 2 miles through rainforest canopy on 16 suspended bridges with panoramic views of Arenal Volcano. Well-maintained trails easy for little ones. Incredible wildlife spotting including sloths, monkeys, and exotic birds.",
+                travelTime: "20 min drive",
+                ages: "All ages (3+)",
+                cost: "$28 adults, $17 kids (6-11)",
+                duration: "2-3 hours",
+                website: "https://misticopark.com/",
+                destination: "Mistico Arenal Hanging Bridges Park, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 5,
-                icon: "💦",
-                title: "Hot Springs & Mud Baths",
-                category: ["adventure", "relaxing"],
-                description: "Soak in natural hot springs and enjoy volcanic mud baths at Hotel Hacienda Guachipelín near Rincón de la Vieja. Day passes include hot springs, mud baths, and nature trails. Can combine with volcano park visit.",
-                travelTime: "50 min drive",
-                ages: "All ages (5+)",
-                cost: "$30 adults, $25 kids",
-                duration: "Half day (3-4 hours)",
-                website: "https://www.guachipelin.com/",
-                destination: "Hotel Hacienda Guachipelin, Rincon de la Vieja, Guanacaste, Costa Rica"
+                icon: "🌋",
+                title: "Arenal 1968 Park - Lava Trails",
+                category: ["adventure", "wildlife"],
+                description: "Hike through 1968 lava flows with 360-degree views of Arenal Volcano and Lake Arenal. Two trail options: Lava Flow Trail (1.8 miles) or Forest Trail (3 miles). Walk where lava once flowed and see volcanic rock formations up close.",
+                travelTime: "25 min drive",
+                ages: "All ages (5+ recommended)",
+                cost: "$15-18 per person",
+                duration: "2-3 hours",
+                website: "https://arenalvolcanopark.com/",
+                destination: "Arenal 1968 Park, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 6,
-                icon: "⛵",
-                title: "Catamaran Snorkeling Tour",
-                category: ["beach", "wildlife"],
-                description: "Sail the Gulf of Papagayo on a catamaran with snorkeling stops. See dolphins, whales, sea turtles, and colorful fish. Includes lunch, drinks, snorkeling gear, and life vests. Morning or sunset tours available.",
-                travelTime: "Pickup from resort",
-                ages: "All ages (3+)",
-                cost: "$70-95 per person (group), $869-1174 private boat",
-                duration: "4 hours",
-                website: "https://www.papagayotours.com/",
-                destination: "Playa Hermosa, Guanacaste, Costa Rica"
+                icon: "🦅",
+                title: "Sky Adventures - Zipline & Tram",
+                category: ["adventure", "older-kids"],
+                description: "Complete adventure park with ziplines through rainforest canopy, aerial tram, and hanging bridges. Amazing Arenal Volcano and lake views. Very safe for kids - children under 13 must be with adult. Can do just one activity or combo package.",
+                travelTime: "20 min drive",
+                ages: "5+ (zipline); all ages (tram/bridges)",
+                cost: "$50-85 per person (varies by package)",
+                duration: "Half day (3-5 hours)",
+                website: "https://skyadventures.travel/",
+                destination: "Sky Adventures Arenal, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 7,
-                icon: "🐆",
-                title: "Ponderosa Safari & Adventure Park",
-                category: ["wildlife", "adventure"],
-                description: "Safari tour where you can feed zebras, giraffes, and African cattle! Also offers waterfall visits, ziplines, kayaking, and horseback riding. Located just outside Liberia. A unique Costa Rican safari experience.",
-                travelTime: "35-45 min drive",
-                ages: "All ages (safari), 8+ (zipline)",
-                cost: "$50-80 per person (varies by activities)",
-                duration: "Half to full day",
-                website: "https://ponderosaadventurepark.com/",
-                destination: "Ponderosa Adventure Park, Liberia, Guanacaste, Costa Rica"
+                icon: "💧",
+                title: "La Fortuna Waterfall",
+                category: ["adventure", "relaxing"],
+                description: "Stunning 230-foot waterfall with crystal-clear swimming pool. Well-maintained staircase (500 steps down, count them with kids!). Great for cooling off and playing in natural pools. Bring towels and water shoes. Designated rest areas for spotting wildlife.",
+                travelTime: "20 min drive",
+                ages: "All ages (3+ recommended)",
+                cost: "$18 adults, free for kids under 8",
+                duration: "2-3 hours",
+                website: "https://www.sinac.go.cr/",
+                destination: "La Fortuna Waterfall, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 8,
-                icon: "🐒",
-                title: "Las Pumas Rescue Center",
-                category: ["wildlife"],
-                description: "Wildlife rehabilitation center where kids can see rescued rainforest animals and birds up close. Educational experience supporting animal conservation. See jaguars, pumas, monkeys, and exotic birds.",
-                travelTime: "30 min drive",
-                ages: "All ages (3+)",
-                cost: "$15-25 per person",
-                duration: "2-3 hours",
-                destination: "Las Pumas Rescue Center, Canas, Guanacaste, Costa Rica"
+                icon: "🚣",
+                title: "White Water Rafting - Balsa River",
+                category: ["adventure", "older-kids"],
+                description: "Family-friendly rafting with gentle Class II-III rapids perfect for beginners. Safe adventure seeing monkeys, sloths, toucans along riverbanks. Professional guides, safety equipment, lunch included. Multiple families rave about this with young kids.",
+                travelTime: "30-40 min drive",
+                ages: "5-6+ years (varies by operator)",
+                cost: "$65-85 per person",
+                duration: "Half day (5 hours total)",
+                website: "https://arenalrafting.com/",
+                destination: "Balsa River, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 9,
-                icon: "🌊",
-                title: "Beach Hopping: Conchal & Tamarindo",
-                category: ["beach", "relaxing"],
-                description: "Visit Playa Conchal (famous for shell-sand beach) and Tamarindo (surf town with shops and restaurants). Private tour with bilingual guide, fruits & water. Customize the day at your own pace. Great for beach variety!",
-                travelTime: "20-35 min to beaches",
-                ages: "All ages (0+)",
-                cost: "$60-100 per person for guided tour, or drive yourself",
-                duration: "Full day (6-8 hours)",
-                destination: "Playa Conchal, Guanacaste, Costa Rica"
+                icon: "🕳️",
+                title: "Venado Caves Underground Tour",
+                category: ["adventure", "older-kids"],
+                description: "Unique cave exploration through tight spaces, rock formations, and underground rivers. Get wet, muddy, and have an adventure! Guides patient with kids. Not for claustrophobic, but thrilling for adventurous families. Helmet and lights provided.",
+                travelTime: "45 min drive",
+                ages: "5-8+ years (varies by operator)",
+                cost: "$70-80 adults, $47-70 kids",
+                duration: "Half day (4 hours total)",
+                website: "https://cavernasdelvenado.com/",
+                destination: "Venado Caves, Venado, Alajuela, Costa Rica"
             },
             {
                 id: 10,
-                icon: "🏄",
-                title: "Surf Lessons in Tamarindo",
-                category: ["adventure", "beach", "older-kids"],
-                description: "Beginner-friendly surf lessons at Tamarindo Beach. Gentle waves and sandy bottom make it perfect for kids and families learning to surf. Professional instructors provide boards and instruction.",
-                travelTime: "35 min drive",
-                ages: "8+ recommended",
-                cost: "$70 per person",
+                icon: "🏍️",
+                title: "ATV Quad Bike Adventure",
+                category: ["adventure", "older-kids"],
+                description: "Ride ATVs through rainforest trails with Arenal Volcano views. Operators offer easier routes for families and non-experienced riders. Kids 5+ can ride with adults; 16+ can drive with license. Muddy, exciting adventure!",
+                travelTime: "20-30 min drive",
+                ages: "5+ (passenger); 16+ (driver with license)",
+                cost: "$100-130 single; $10-30 additional rider",
                 duration: "2-3 hours",
-                destination: "Tamarindo Beach, Guanacaste, Costa Rica"
+                website: "https://paradise-adventures-costa-rica.com/",
+                destination: "La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 11,
-                icon: "🐊",
-                title: "Palo Verde National Park Boat Safari",
-                category: ["wildlife", "adventure"],
-                description: "Boat safari on the Tempisque River to spot howler monkeys, capuchin monkeys, crocodiles, iguanas, and exotic birds. 20-meter boardwalk at Laguna Palo Verde for wildlife viewing. Amazing birdwatching!",
-                travelTime: "50-60 min drive",
-                ages: "All ages (4+)",
-                cost: "$50-75 per person",
-                duration: "Half day (4-5 hours)",
-                destination: "Palo Verde National Park, Guanacaste, Costa Rica"
+                icon: "🐴",
+                title: "Horseback Riding to Waterfall",
+                category: ["adventure"],
+                description: "Gentle 45-minute horseback ride through rainforest to La Fortuna Waterfall area. Horses matched to experience level. Time to swim and relax. Helmets provided. Kids ride their own horse (not with adult).",
+                travelTime: "20-30 min drive",
+                ages: "7+ years (some operators allow 5+)",
+                cost: "$65 adults, $49 kids",
+                duration: "4 hours total",
+                website: "https://horsebackridingarenal.com/",
+                destination: "La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 12,
-                icon: "💧",
-                title: "Llanos de Cortez Waterfall",
-                category: ["adventure", "relaxing"],
-                description: "Beautiful, easily accessible waterfall perfect for families. Short walk to a wide waterfall with a natural swimming pool. Great for cooling off and playing in the water. Less crowded than other waterfalls.",
-                travelTime: "40 min drive",
-                ages: "All ages (3+)",
-                cost: "$5 entrance fee",
-                duration: "2-4 hours",
-                destination: "Llanos de Cortez Waterfall, Bagaces, Guanacaste, Costa Rica"
+                icon: "♨️",
+                title: "Tabacon Hot Springs",
+                category: ["hot-springs", "relaxing"],
+                description: "Luxurious volcanic hot springs at base of Arenal Volcano with 20+ natural pools (72-105°F). Beautiful gardens, waterfalls, waterslide. Includes welcome drink, towel, locker. Can add meals. Reserve months in advance for peak season!",
+                travelTime: "10-15 min drive",
+                ages: "All ages (0+); kids 6-11 discounted",
+                cost: "$80-99 adults, $55 kids (6-11), free under 6",
+                duration: "Half to full day (10am-10pm access)",
+                website: "https://tabacon.com/",
+                destination: "Tabacon Hot Springs, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 13,
-                icon: "🐴",
-                title: "Horseback Riding on the Beach",
-                category: ["adventure", "beach"],
-                description: "Horseback ride along the beach and through coastal trails. Suitable for beginners with gentle horses. Experience includes riding through forests and along the shoreline. Magical sunset rides available.",
-                travelTime: "20-30 min drive",
-                ages: "8+ years",
-                cost: "$60-80 per person",
-                duration: "2-3 hours",
-                destination: "Playa Hermosa, Guanacaste, Costa Rica"
+                icon: "🎢",
+                title: "Baldi Hot Springs with Water Slides",
+                category: ["hot-springs", "relaxing"],
+                description: "Fun hot springs resort with 25 thermal pools PLUS 4 large waterslides. Dedicated Baldi Kids play area with small slides and splash zone. More playful atmosphere than Tabacon. On main road in La Fortuna.",
+                travelTime: "10 min drive",
+                ages: "All ages (0+)",
+                cost: "$36 adults, $25 kids (6-10), free under 5; add $22-33 for meal",
+                duration: "Half to full day (10am-10pm)",
+                website: "https://baldihotsprings.cr/",
+                destination: "Baldi Hot Springs, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 14,
-                icon: "🎣",
-                title: "Resort Pool & Activities Day",
-                category: ["resort", "relaxing"],
-                description: "Relaxing day at the resort's beautiful pools with poolside service. Let the kids swim while adults relax with a book. Take advantage of resort amenities, spa, and restaurants. Perfect rest day between adventures!",
-                travelTime: "0 min (on-site)",
-                ages: "All ages (0+)",
-                cost: "Free (included)",
-                duration: "Full day",
-                destination: null
+                icon: "🛶",
+                title: "Kayaking on Lake Arenal",
+                category: ["adventure", "older-kids"],
+                description: "Paddle Lake Arenal's calm waters with stunning volcano views. Visit small islands, spot birds and wildlife. One or two-person kayaks. Great for families with older kids who can paddle. Beginner-friendly guided tour.",
+                travelTime: "30-40 min drive",
+                ages: "8-10+ years",
+                cost: "$60-75 per person",
+                duration: "4 hours total (3 hours on water)",
+                website: "https://misticopark.com/",
+                destination: "Lake Arenal, Alajuela, Costa Rica"
             },
             {
                 id: 15,
-                icon: "🌲",
-                title: "Papagayo Nature Center",
-                category: ["wildlife", "resort"],
-                description: "Guided nature walk where a naturalist shows native 'critters' and teaches about local ecosystems. Highly rated by families as a trip highlight. Educational and interactive experience right near the resort.",
-                travelTime: "10-15 min drive",
-                ages: "All ages (5+)",
-                cost: "$30-50 per person",
-                duration: "2-3 hours",
-                destination: "Papagayo Peninsula, Guanacaste, Costa Rica"
+                icon: "🍫",
+                title: "Rainforest Chocolate Tour",
+                category: ["cultural", "relaxing"],
+                description: "Hands-on chocolate making from cacao harvest to finished product! Learn history, roast beans, grind seeds, add sugar, taste unlimited chocolate. Very interactive and delicious. Perfect for all ages. Arenal Volcano views from farm.",
+                travelTime: "20 min drive",
+                ages: "5+ years (free under 5)",
+                cost: "$43 adults, $33 kids (6-12), free under 5",
+                duration: "1.5 hours",
+                website: "https://rainforestchocolatetour.com/",
+                destination: "Rainforest Chocolate Tour, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 16,
-                icon: "🍽️",
-                title: "Restaurant Day in Tamarindo",
-                category: ["beach", "relaxing"],
-                description: "Explore the surf town of Tamarindo with its beach shops, restaurants, and laid-back vibe. Try local cuisine, walk the beach, and enjoy the town atmosphere. Great for a casual, unstructured day.",
-                travelTime: "35 min drive",
-                ages: "All ages (0+)",
-                cost: "Meals only (budget-friendly to upscale)",
-                duration: "Half to full day",
-                destination: "Tamarindo, Guanacaste, Costa Rica"
+                icon: "☕",
+                title: "Don Juan Coffee & Chocolate Farm",
+                category: ["cultural", "relaxing"],
+                description: "Combined coffee, chocolate, and sugarcane tour. Learn traditional Costa Rican farming, press fresh sugarcane juice, make chocolate, roast coffee beans. More comprehensive than chocolate-only tours. Very family-friendly.",
+                travelTime: "25 min drive",
+                ages: "All ages (5+)",
+                cost: "$35-45 per person",
+                duration: "3 hours",
+                website: "https://www.donjuantour.com/",
+                destination: "Don Juan Coffee Tour, La Fortuna, Alajuela, Costa Rica"
             },
             {
                 id: 17,
-                icon: "🌅",
-                title: "Sunset Catamaran Cruise",
-                category: ["beach", "relaxing"],
-                description: "Evening catamaran sail to watch the spectacular Costa Rican sunset. More relaxed than the snorkeling version. Includes drinks, snacks, and music. Romantic option while kids can still enjoy the boat ride.",
-                travelTime: "Pickup from resort",
-                ages: "All ages (0+)",
-                cost: "$70-95 per person",
-                duration: "3-4 hours (late afternoon)",
-                destination: "Playa Hermosa, Guanacaste, Costa Rica"
-            },
-            {
-                id: 18,
-                icon: "🏊",
-                title: "Private Beach Day with Setup",
-                category: ["beach", "relaxing"],
-                description: "Resort can arrange a private beach setup with umbrellas, chairs, coolers, and water toys at one of the secluded beaches. Have a private family beach day without crowds. Staff can bring lunch and drinks.",
-                travelTime: "0-5 min (on-site)",
-                ages: "All ages (0+)",
-                cost: "$100-200 setup fee",
-                duration: "Full day",
-                destination: null
-            },
-            {
-                id: 19,
                 icon: "💎",
-                title: "Rio Celeste Waterfall - Tenorio Volcano",
+                title: "Rio Celeste Waterfall",
                 category: ["adventure", "wildlife"],
-                description: "Stunning turquoise blue waterfall in Tenorio Volcano National Park. The vibrant color is created by a natural chemical reaction! Moderate 4km hike through rainforest with 150 steps to viewpoint. Spot sloths, toucans, and howler monkeys along the trail. A must-see natural wonder!",
+                description: "Stunning bright turquoise-blue waterfall created by natural chemical reaction. Moderate 2.5-mile hike through rainforest with 150 steps to viewpoint. Spot sloths, toucans, howler monkeys. One of Costa Rica's most unique natural wonders!",
                 travelTime: "90-120 min drive",
                 ages: "All ages (5+ recommended)",
-                cost: "$12 adults, $5 kids (self-guided) or $85-110 per person (guided tour with lunch)",
-                duration: "Full day (6-8 hours)",
+                cost: "$12 adults, $5 kids (self-guided) OR $85-110 (guided tour with lunch)",
+                duration: "Full day (6-8 hours with travel)",
                 website: "https://www.sinac.go.cr/",
                 destination: "Rio Celeste Waterfall, Tenorio Volcano National Park, Alajuela, Costa Rica"
             },
             {
-                id: 20,
-                icon: "🦅",
-                title: "Congo Trail Canopy Zipline",
-                category: ["adventure", "older-kids"],
-                description: "Guanacaste's most famous zipline canopy tour! Fly through the rainforest on 11 platforms and cross 3 hanging bridges. Suitable for kids 3+ with parent. See monkeys and exotic birds from the treetops. Option for Tarzan swing and Superman ziplines for thrill-seekers. Animal rescue center on-site!",
-                travelTime: "35-45 min drive",
-                ages: "3+ years (with parent)",
-                cost: "$60-70 per person",
-                duration: "Half day (3-4 hours)",
-                website: "https://www.congocanopy.com/",
-                destination: "Congo Trail Canopy Tour, Sardinal, Guanacaste, Costa Rica"
+                id: 18,
+                icon: "🐊",
+                title: "Safari Float on Penas Blancas River",
+                category: ["wildlife", "relaxing"],
+                description: "Gentle floating river tour perfect for young kids. Laid-back wildlife viewing from raft - spot monkeys, birds, crocodiles, iguanas, sloths. No rapids, very safe. Great intro to Costa Rican wildlife for families.",
+                travelTime: "45 min drive",
+                ages: "3+ years",
+                cost: "$60-75 per person",
+                duration: "Half day (4 hours)",
+                website: "https://www.costaricadescents.com/",
+                destination: "Penas Blancas River, Alajuela, Costa Rica"
             },
             {
-                id: 21,
-                icon: "🎢",
-                title: "Diamante Eco Adventure Park",
-                category: ["adventure", "wildlife", "beach"],
-                description: "Ultimate adventure park with ziplines (longest dual-line in Costa Rica!), animal sanctuary, cultural farm tour, jungle obstacle course, and beach access. Something for everyone! Kids playground for younger ones. Buffet lunch included with Adventure Pass. Ocean views while ziplining!",
-                travelTime: "40-50 min drive",
-                ages: "All ages (5+ for zipline)",
-                cost: "$63-78 per person (varies by age and package)",
-                duration: "Full day (6-8 hours)",
-                website: "https://diamanteecoadventurepark.com/",
-                destination: "Diamante Eco Adventure Park, Playa Matapalo, Guanacaste, Costa Rica"
-            },
-            {
-                id: 22,
-                icon: "🌿",
-                title: "Monteverde Cloud Forest Day Trip",
+                id: 19,
+                icon: "🌲",
+                title: "Arenal Observatory Lodge Trails",
                 category: ["wildlife", "adventure"],
-                description: "Visit Costa Rica's famous misty cloud forest ecosystem! Walk 1.9 miles of hanging bridges through the canopy. See colorful butterflies, hummingbirds, and over 30 species of reptiles and amphibians. Learn about unique cloud forest plants. Includes breakfast, lunch, and round-trip transport. Magical experience!",
-                travelTime: "3 hours drive",
-                ages: "5+ years",
-                cost: "$95-120 per person (full day tour with meals)",
-                duration: "Full day (12 hours with travel)",
-                website: "https://monteverdetourscr.com/",
-                destination: "Monteverde Cloud Forest, Puntarenas, Costa Rica"
-            },
-            {
-                id: 23,
-                icon: "☕",
-                title: "Coffee & Chocolate Farm Tour - Playas del Coco",
-                category: ["wildlife", "relaxing"],
-                description: "Family-run coffee roasting experience at Big Fingers Coffee Roaster. Learn the journey from bean to cup! Roast your own coffee beans, grind cacao by hand, make traditional Costa Rican chocolate, and enjoy tastings. Interactive and educational for all ages. Perfect introduction to Costa Rican coffee culture.",
-                travelTime: "25-30 min drive",
+                description: "Extensive 7-mile trail system through 870-acre rainforest reserve with volcano views. Day pass includes guided naturalist walk. Trails to waterfalls and hanging bridge. 500+ bird species recorded. Universal accessible path available.",
+                travelTime: "30 min drive",
                 ages: "All ages (4+)",
-                cost: "$38-40 per person",
-                duration: "2 hours",
-                website: "https://cafetioleo.com/",
-                destination: "Playas del Coco, Guanacaste, Costa Rica"
+                cost: "$20-25 day pass with guided walk",
+                duration: "Half to full day",
+                website: "https://www.arenalobservatorylodge.com/",
+                destination: "Arenal Observatory Lodge, La Fortuna, Alajuela, Costa Rica"
             },
             {
-                id: 24,
-                icon: "🍫",
-                title: "Café Tio Leo Cultural Farm Experience",
-                category: ["wildlife", "relaxing"],
-                description: "Authentic farm tour in Guardia de Liberia! Walk through coffee, cacao, and sugarcane plantations. Press fresh sugarcane juice, learn traditional chocolate-making techniques, and make empanadas from scratch. Hear stories about Costa Rican farming traditions. Hands-on, cultural, and delicious!",
-                travelTime: "15-20 min drive",
-                ages: "All ages (5+)",
-                cost: "$35-45 per person",
-                duration: "3-4 hours",
-                website: "https://cafetioleo.com/",
-                destination: "Cafe Tio Leo, Guardia, Liberia, Guanacaste, Costa Rica"
-            },
-            {
-                id: 25,
-                icon: "🫓",
-                title: "Guachipelin Farm-to-Table Cooking Class",
-                category: ["relaxing"],
-                description: "Learn traditional Guanacaste cooking with trained local chefs! Make corn tortillas from scratch, prepare authentic Costa Rican dishes, and learn about homesteading. Pick fresh herbs from the greenhouse, and enjoy the meal you created together. Can combine with hot springs visit!",
-                travelTime: "50 min drive",
-                ages: "All ages (6+)",
-                cost: "$45-65 per person",
-                duration: "3 hours (cooking class only)",
-                website: "https://www.guachipelin.com/",
-                destination: "Hotel Hacienda Guachipelin, Rincon de la Vieja, Guanacaste, Costa Rica"
-            },
-            {
-                id: 26,
-                icon: "🌱",
-                title: "Don Jorge Agro-Eco Farm Tour",
-                category: ["wildlife", "relaxing"],
-                description: "Visit a 100% family-owned Costa Rican farm! Learn about cacao and coffee cultivation through generations. Pick coffee cherries (when in season), ride a traditional ox-cart, and make your own chocolate to take home. Visit the family home for fresh lemonade and coffee. Authentic rural experience!",
-                travelTime: "30-40 min drive",
-                ages: "All ages (5+)",
-                cost: "$30-40 per person",
-                duration: "2-3 hours",
-                website: "https://www.chocolateandcoffeefarmtourdonjorge.com/",
-                destination: "Don Jorge Farm, Liberia, Guanacaste, Costa Rica"
+                id: 20,
+                icon: "🎪",
+                title: "Arenal Mundo Aventura Park",
+                category: ["adventure", "wildlife"],
+                description: "Adventure park offering multiple activities: canopy tour, horseback riding, waterfall hikes, hanging bridges. Can customize your day with a la carte activities or package deals. Good option for families wanting variety in one location.",
+                travelTime: "25 min drive",
+                ages: "Varies by activity (most 5+)",
+                cost: "$40-80 per person (varies by activities)",
+                duration: "Half to full day",
+                website: "https://www.arenalmundoaventura.com/",
+                destination: "Arenal Mundo Aventura, La Fortuna, Alajuela, Costa Rica"
             }
         ];
 
@@ -1039,8 +973,7 @@
             day1: [],
             day2: [],
             day3: [],
-            day4: [],
-            day5: []
+            day4: []
         };
 
         let currentDay = null;
@@ -1059,7 +992,7 @@
             const itineraryDiv = document.getElementById('itinerary');
             itineraryDiv.innerHTML = '';
 
-            for (let i = 1; i <= 5; i++) {
+            for (let i = 1; i <= 4; i++) {
                 const dayKey = `day${i}`;
                 const dayDiv = document.createElement('div');
                 dayDiv.className = 'day-section';
@@ -1134,7 +1067,7 @@
                 }
 
                 const mapsUrl = activity.destination
-                    ? `https://www.google.com/maps/dir/?api=1&origin=Andaz+Peninsula+Papagayo+Resort&destination=${encodeURIComponent(activity.destination)}`
+                    ? `https://www.google.com/maps/dir/?api=1&origin=Nayara+Gardens+La+Fortuna&destination=${encodeURIComponent(activity.destination)}`
                     : null;
 
                 const linksHTML = (activity.website || mapsUrl)
@@ -1188,7 +1121,7 @@
             ).join(' ');
 
             const mapsUrl = activity.destination
-                ? `https://www.google.com/maps/dir/?api=1&origin=Andaz+Peninsula+Papagayo+Resort&destination=${encodeURIComponent(activity.destination)}`
+                ? `https://www.google.com/maps/dir/?api=1&origin=Nayara+Gardens+La+Fortuna&destination=${encodeURIComponent(activity.destination)}`
                 : null;
 
             const linksHTML = (activity.website || mapsUrl)
@@ -1372,11 +1305,11 @@
         }
 
         function saveItinerary() {
-            localStorage.setItem('costaRicaItinerary', JSON.stringify(itinerary));
+            localStorage.setItem('nayaraItinerary', JSON.stringify(itinerary));
         }
 
         function loadItinerary() {
-            const saved = localStorage.getItem('costaRicaItinerary');
+            const saved = localStorage.getItem('nayaraItinerary');
             if (saved) {
                 itinerary = JSON.parse(saved);
                 renderItinerary();
